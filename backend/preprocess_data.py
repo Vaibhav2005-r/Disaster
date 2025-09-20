@@ -1,6 +1,6 @@
 import csv
 import json
-from backend.ai_core import process_sos_message
+from ai_core import process_sos_message
 
 INPUT_CSV_FILE = "sos_messages.csv"
 OUTPUT_JSON_FILE = "processed_data.json"

@@ -1,114 +1,200 @@
 [
     {
         "id": 1,
-        "original_message": "Stuck on the roof at Andheri station, water level rising fast! Need immediate rescue. #MumbaiFloods",
-        "location_text": "Andheri station",
+        "original_message": "Part of the sea wall has collapsed near the Gateway of India. Water is rushing in. We need immediate evacuation from the waterfront shops! #MumbaiDeluge",
+        "location_text": "near the Gateway of India",
         "urgency": "Life-threatening",
         "need_type": "Rescue",
-        "summary": "Person needs immediate rescue from the roof of Andheri station due to rapidly rising water levels.",
+        "summary": "Sea wall collapse near Gateway of India requires immediate evacuation of waterfront shops due to rushing water.",
         "severity_score": 15,
         "coordinates": {
-            "lat": 19.1198242,
-            "lng": 72.846531
+            "lat": 18.9219841,
+            "lng": 72.8346543
         },
         "authenticity_score": 9,
-        "reasoning": "Specific location, urgent tone, and relevant hashtag increase authenticity.",
+        "reasoning": "The message provides a specific location, describes a credible disaster scenario, and uses a relevant hashtag, indicating a high likelihood of authenticity.",
         "flags": []
     },
     {
         "id": 2,
-        "original_message": "Family of 4 trapped in our car near Nagpur bridge. My son is having trouble breathing. Urgent medical help needed!",
-        "location_text": "near Nagpur bridge",
+        "original_message": "My grandfather is having a heart attack at our home in Colaba Causeway. We can't get out due to flooding. Need an ambulance urgently. Apartment 4B, Causeway House.",
+        "location_text": null,
+        "urgency": null,
+        "need_type": null,
+        "summary": null,
+        "severity_score": 0,
+        "coordinates": null,
+        "authenticity_score": null,
+        "reasoning": null,
+        "flags": []
+    },
+    {
+        "id": 3,
+        "original_message": "We are a group of 50 people stranded on the upper floor of Phoenix Marketcity mall in Kurla. Power is out, but we are safe for now. Need food and water supplies.",
+        "location_text": "Phoenix Marketcity mall in Kurla",
+        "urgency": "Urgent",
+        "need_type": "Supplies",
+        "summary": "Fifty people are stranded on the upper floor of Phoenix Marketcity mall in Kurla due to a power outage and need food and water.",
+        "severity_score": 7,
+        "coordinates": {
+            "lat": 19.0865033,
+            "lng": 72.88842319999999
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and number of people, indicating a higher likelihood of authenticity.",
+        "flags": []
+    },
+    {
+        "id": 4,
+        "original_message": "KEM Hospital in Parel is running out of oxygen cylinders and blood bags. We have over 20 critical patients. Need immediate medical resupply.",
+        "location_text": "KEM Hospital in Parel",
         "urgency": "Life-threatening",
         "need_type": "Medical",
-        "summary": "A family of four needs urgent medical assistance as they are trapped in their car near Nagpur bridge, and a child is having breathing difficulties.",
+        "summary": "KEM Hospital in Parel urgently needs oxygen cylinders and blood bags for over 20 critical patients.",
+        "severity_score": 15,
+        "coordinates": {
+            "lat": 19.0042672,
+            "lng": 72.8433945
+        },
+        "authenticity_score": 9,
+        "reasoning": "The message provides specific location, urgent need, and quantifiable details (20 critical patients), suggesting high authenticity.",
+        "flags": []
+    },
+    {
+        "id": 5,
+        "original_message": "The main road into Dharavi is blocked by a landslide. No vehicles can get in or out. Requesting heavy machinery to clear the debris.",
+        "location_text": "main road into Dharavi",
+        "urgency": "Urgent",
+        "need_type": "Infrastructure",
+        "summary": "A landslide has blocked the main road into Dharavi, requiring heavy machinery to clear debris and restore access.",
+        "severity_score": 9,
+        "coordinates": {
+            "lat": 19.0380334,
+            "lng": 72.8537589
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and a plausible, urgent situation with a clear request, suggesting a high likelihood of authenticity.",
+        "flags": []
+    },
+    {
+        "id": 6,
+        "original_message": "Our family of 4 needs food. We are in our flat near Powai Lake and have run out of everything. Not life-threatening yet, but we need help.",
+        "location_text": "near Powai Lake",
+        "urgency": "Urgent",
+        "need_type": "Food",
+        "summary": "A family of four near Powai Lake urgently needs food supplies.",
+        "severity_score": 7,
+        "coordinates": {
+            "lat": 19.1272655,
+            "lng": 72.9048498
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and a plausible scenario, though lacks extreme urgency that might signal a more critical situation.",
+        "flags": []
+    },
+    {
+        "id": 7,
+        "original_message": "Are there any government shelters open near Juhu Beach? We need to evacuate our home but don't know where to go.",
+        "location_text": "near Juhu Beach",
+        "urgency": "Urgent",
+        "need_type": "Shelter",
+        "summary": "Requesting information about available government shelters near Juhu Beach due to imminent evacuation.",
+        "severity_score": 8,
+        "coordinates": {
+            "lat": 19.1048146,
+            "lng": 72.8267098
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message is specific about location and need, showing genuine concern without spammy elements.",
+        "flags": []
+    },
+    {
+        "id": 8,
+        "original_message": "Landline is down at Chhatrapati Shivaji Maharaj Terminus (CSMT). Can't contact railway authorities. This is a major communication failure.",
+        "location_text": "Chhatrapati Shivaji Maharaj Terminus (CSMT)",
+        "urgency": "Urgent",
+        "need_type": "Infrastructure",
+        "summary": "Communication failure at CSMT due to landline outage, preventing contact with railway authorities.",
+        "severity_score": 9,
+        "coordinates": {
+            "lat": 18.939078,
+            "lng": 72.835505
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and a plausible problem, indicating a genuine infrastructure issue.",
+        "flags": []
+    },
+    {
+        "id": 9,
+        "original_message": "HELP!!! MUMBAI IS SINKING!!! WE ARE ALL DOOMED!!!! #MumbaiFloods #SOS",
+        "location_text": "Mumbai",
+        "urgency": "Life-threatening",
+        "need_type": "Rescue",
+        "summary": "Mumbai is experiencing severe flooding, requiring immediate rescue efforts.",
         "severity_score": 15,
         "coordinates": {
             "lat": 18.9581934,
             "lng": 72.8320729
         },
-        "authenticity_score": 9,
-        "reasoning": "The message provides specific details, including location, the number of people involved, and a clear medical emergency, making it highly credible.",
-        "flags": []
+        "authenticity_score": 4,
+        "reasoning": "The message uses hyperbolic language ('sinking', 'doomed') and lacks specific location details, suggesting a possible exaggeration or lack of clear information.",
+        "flags": [
+            "vague location",
+            "hyperbolic language"
+        ]
     },
     {
-        "id": 3,
-        "original_message": "We are safe but running out of food and water in our building at Lokhandwala Complex. Need supplies for 20 people.",
-        "location_text": "Lokhandwala Complex",
-        "urgency": "Urgent",
-        "need_type": "Supplies",
-        "summary": "Twenty people in Lokhandwala Complex urgently require food and water supplies.",
+        "id": 10,
+        "original_message": "Free rescue boats for all Mumbai citizens! Click here to register your location and get help fast: tiny.url/fake-rescue-link",
+        "location_text": "Unknown",
+        "urgency": "Minor",
+        "need_type": "Rescue",
+        "summary": "A message offering free rescue boats in Mumbai with a suspicious link.",
         "severity_score": 7,
         "coordinates": {
-            "lat": 19.1435906,
-            "lng": 72.8246291
+            "lat": 18.9581934,
+            "lng": 72.8320729
         },
-        "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and a quantifiable need, indicating a higher likelihood of authenticity.",
-        "flags": []
+        "authenticity_score": 1,
+        "reasoning": "The message contains a spam link and uses generic language suggesting a likely phishing attempt.",
+        "flags": [
+            "spam link",
+            "vague location",
+            "generic plea"
+        ]
     },
     {
-        "id": 4,
-        "original_message": "Minor flooding in our area, but we have an elderly person who needs to be moved to a shelter. Location: JVPD scheme.",
-        "location_text": "JVPD scheme",
+        "id": 11,
+        "original_message": "My basement is flooded. What should I do?",
+        "location_text": "Unknown",
         "urgency": "Urgent",
         "need_type": "Rescue",
-        "summary": "An elderly person needs rescue and relocation to a shelter due to minor flooding.",
+        "summary": "The sender's basement is flooded and requires assistance.",
         "severity_score": 11,
         "coordinates": {
-            "lat": 19.110608,
-            "lng": 72.83255299999999
+            "lat": 18.9581934,
+            "lng": 72.8320729
         },
-        "authenticity_score": 8,
-        "reasoning": "The message contains a specific location and a clear need, suggesting a genuine request for help.",
-        "flags": []
+        "authenticity_score": 7,
+        "reasoning": "The message is specific enough to suggest a genuine problem, but lacks location details, lowering the score.",
+        "flags": [
+            "vague location"
+        ]
     },
     {
-        "id": 5,
-        "original_message": "A building has collapsed near the old post office in Dadar. Heard people screaming. Urgent help required!",
-        "location_text": "near the old post office in Dadar",
+        "id": 12,
+        "original_message": "Electrical pole has fallen and wires are exposed near the entrance of Sanjay Gandhi National Park, Borivali. Very dangerous, sparking in the rain.",
+        "location_text": "near the entrance of Sanjay Gandhi National Park, Borivali",
         "urgency": "Life-threatening",
-        "need_type": "Rescue",
-        "summary": "A building collapse near the old post office in Dadar requires urgent rescue efforts due to trapped individuals.",
-        "severity_score": 15,
-        "coordinates": {
-            "lat": 19.0177989,
-            "lng": 72.84781199999999
-        },
-        "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and a credible description of a life-threatening event, indicating a high likelihood of authenticity.",
-        "flags": []
-    },
-    {
-        "id": 6,
-        "original_message": "Huge tree has fallen on the main road at Marine Drive, blocking all traffic. Infrastructure problem.",
-        "location_text": "Marine Drive",
-        "urgency": "Urgent",
         "need_type": "Infrastructure",
-        "summary": "A fallen tree on Marine Drive's main road is blocking all traffic, requiring infrastructure repair.",
-        "severity_score": 9,
+        "summary": "Fallen electrical pole with exposed wires near Sanjay Gandhi National Park entrance poses a life-threatening danger.",
+        "severity_score": 13,
         "coordinates": {
-            "lat": 18.9441618,
-            "lng": 72.8225818
+            "lat": 19.232779,
+            "lng": 72.8717923
         },
-        "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and a clear description of the problem, suggesting a high likelihood of authenticity.",
-        "flags": []
-    },
-    {
-        "id": 7,
-        "original_message": "Need shelter for my family of 5. Our home in Bandra is completely flooded.",
-        "location_text": "Bandra",
-        "urgency": "Urgent",
-        "need_type": "Shelter",
-        "summary": "A family of five in Bandra needs shelter due to severe flooding.",
-        "severity_score": 8,
-        "coordinates": {
-            "lat": 19.0595596,
-            "lng": 72.8295287
-        },
-        "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and a plausible reason for needing shelter, indicating a higher likelihood of authenticity.",
+        "authenticity_score": 9,
+        "reasoning": "Specific location, detailed description of the hazard, and a sense of urgency increase authenticity.",
         "flags": []
     }
 ]
