@@ -1,0 +1,90 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  overflow: hidden; /* Prevent scrolling on the whole page */
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.sidebar {
+  flex: 0 0 25%; /* Left and right sidebars will each take 25% of the width */
+  max-width: 400px; /* Add a max-width for very large screens */
+  background-color: #f8f9fa;
+  padding: 15px;
+  overflow-y: auto; /* Allow scrolling within the sidebars */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  z-index: 10;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.map-container {
+  flex-grow: 1; /* The map will take up the remaining space */
+  position: relative;
+}
+
+h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 10px;
+  font-size: 1.25rem;
+}
+
+.incident-list-item {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #dee2e6;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.incident-list-item:hover {
+  background-color: #e9ecef;
+  transform: scale(1.02);
+}
+
+.incident-list-item.selected {
+  background-color: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.incident-list-item p {
+  margin: 4px 0;
+}
+
+.urgency-tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.8em;
+}
+
+.urgency-Life-threatening { background-color: #dc3545; }
+.urgency-Urgent { background-color: #ffc107; color: black; }
+.urgency-Minor { background-color: #198754; }
+
+.details-panel p {
+  margin: 5px 0 15px 0;
+}
+
+.route-info {
+  margin-top: 20px;
+  border-top: 2px solid #dee2e6;
+  padding-top: 15px;
+}
+
+.route-info h3 {
+  margin-top: 0;
+}
+
+.loading-text {
+  color: #6c757d;
+}
