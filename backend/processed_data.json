@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "original_message": "Stuck on the roof at Andheri station, water level rising fast! Need immediate rescue. #MumbaiFloods",
+        "location_text": "Andheri station",
+        "urgency": "Life-threatening",
+        "need_type": "Rescue",
+        "summary": "Person needs immediate rescue from the roof of Andheri station due to rapidly rising water levels.",
+        "severity_score": 15,
+        "coordinates": {
+            "lat": 19.1198242,
+            "lng": 72.846531
+        },
+        "authenticity_score": 9,
+        "reasoning": "Specific location, urgent tone, and relevant hashtag increase authenticity.",
+        "flags": []
+    },
+    {
+        "id": 2,
+        "original_message": "Family of 4 trapped in our car near Nagpur bridge. My son is having trouble breathing. Urgent medical help needed!",
+        "location_text": "near Nagpur bridge",
+        "urgency": "Life-threatening",
+        "need_type": "Medical",
+        "summary": "A family of four needs urgent medical assistance as they are trapped in their car near Nagpur bridge, and a child is having breathing difficulties.",
+        "severity_score": 15,
+        "coordinates": {
+            "lat": 18.9581934,
+            "lng": 72.8320729
+        },
+        "authenticity_score": 9,
+        "reasoning": "The message provides specific details, including location, the number of people involved, and a clear medical emergency, making it highly credible.",
+        "flags": []
+    },
+    {
+        "id": 3,
+        "original_message": "We are safe but running out of food and water in our building at Lokhandwala Complex. Need supplies for 20 people.",
+        "location_text": "Lokhandwala Complex",
+        "urgency": "Urgent",
+        "need_type": "Supplies",
+        "summary": "Twenty people in Lokhandwala Complex urgently require food and water supplies.",
+        "severity_score": 7,
+        "coordinates": {
+            "lat": 19.1435906,
+            "lng": 72.8246291
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and a quantifiable need, indicating a higher likelihood of authenticity.",
+        "flags": []
+    },
+    {
+        "id": 4,
+        "original_message": "Minor flooding in our area, but we have an elderly person who needs to be moved to a shelter. Location: JVPD scheme.",
+        "location_text": "JVPD scheme",
+        "urgency": "Urgent",
+        "need_type": "Rescue",
+        "summary": "An elderly person needs rescue and relocation to a shelter due to minor flooding.",
+        "severity_score": 11,
+        "coordinates": {
+            "lat": 19.110608,
+            "lng": 72.83255299999999
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message contains a specific location and a clear need, suggesting a genuine request for help.",
+        "flags": []
+    },
+    {
+        "id": 5,
+        "original_message": "A building has collapsed near the old post office in Dadar. Heard people screaming. Urgent help required!",
+        "location_text": "near the old post office in Dadar",
+        "urgency": "Life-threatening",
+        "need_type": "Rescue",
+        "summary": "A building collapse near the old post office in Dadar requires urgent rescue efforts due to trapped individuals.",
+        "severity_score": 15,
+        "coordinates": {
+            "lat": 19.0177989,
+            "lng": 72.84781199999999
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and a credible description of a life-threatening event, indicating a high likelihood of authenticity.",
+        "flags": []
+    },
+    {
+        "id": 6,
+        "original_message": "Huge tree has fallen on the main road at Marine Drive, blocking all traffic. Infrastructure problem.",
+        "location_text": "Marine Drive",
+        "urgency": "Urgent",
+        "need_type": "Infrastructure",
+        "summary": "A fallen tree on Marine Drive's main road is blocking all traffic, requiring infrastructure repair.",
+        "severity_score": 9,
+        "coordinates": {
+            "lat": 18.9441618,
+            "lng": 72.8225818
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and a clear description of the problem, suggesting a high likelihood of authenticity.",
+        "flags": []
+    },
+    {
+        "id": 7,
+        "original_message": "Need shelter for my family of 5. Our home in Bandra is completely flooded.",
+        "location_text": "Bandra",
+        "urgency": "Urgent",
+        "need_type": "Shelter",
+        "summary": "A family of five in Bandra needs shelter due to severe flooding.",
+        "severity_score": 8,
+        "coordinates": {
+            "lat": 19.0595596,
+            "lng": 72.8295287
+        },
+        "authenticity_score": 8,
+        "reasoning": "The message provides a specific location and a plausible reason for needing shelter, indicating a higher likelihood of authenticity.",
+        "flags": []
+    }
+]
