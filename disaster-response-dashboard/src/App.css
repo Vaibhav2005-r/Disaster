@@ -1,9 +1,30 @@
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  margin: 0;
-  overflow: hidden; /* Prevent scrolling on the whole page */
+/* --- CSS Variables for Theming --- */
+:root {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2c2c2c;
+  --bg-tertiary: #3a3a3a;
+  --bg-hover: #4a4a4a;
+  --text-primary: #f0f0f0;
+  --text-secondary: #a0a0a0;
+  --border-color: #444;
+  --accent-color: #007bff;
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --urgency-life-threatening: #e63946;
+  --urgency-urgent: #fca311;
+  --urgency-minor: #2a9d8f;
+  --border-radius: 8px;
 }
 
+/* --- General Body Styles --- */
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+}
+
+/* --- Main Layout Containers --- */
 .app-container {
   display: flex;
   height: 100vh;
@@ -11,80 +32,241 @@ body {
 }
 
 .sidebar {
-  flex: 0 0 25%; /* Left and right sidebars will each take 25% of the width */
-  max-width: 400px; /* Add a max-width for very large screens */
-  background-color: #f8f9fa;
-  padding: 15px;
-  overflow-y: auto; /* Allow scrolling within the sidebars */
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  z-index: 10;
-  box-sizing: border-box; /* Ensures padding is included in the width */
+  width: 350px; /* Fixed width for consistent layout */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+  padding: 1rem;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+}
+
+.details-panel {
+  width: 380px;
+  border-left: 1px solid var(--border-color);
+  border-right: none;
 }
 
 .map-container {
-  flex-grow: 1; /* The map will take up the remaining space */
+  flex-grow: 1;
   position: relative;
 }
 
+/* --- Typography & Headers --- */
 h2 {
-  margin-top: 0;
-  border-bottom: 2px solid #dee2e6;
-  padding-bottom: 10px;
+  margin: 0 0 1rem 0;
   font-size: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  color: var(--text-primary);
 }
 
+h3 {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+/* --- Incident List Styling --- */
 .incident-list-item {
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: var(--bg-tertiary);
+  border-radius: var(--border-radius);
   cursor: pointer;
-  border: 1px solid #dee2e6;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: background-color 0.2s ease, border-left-color 0.2s ease, transform 0.2s ease;
+  border-left: 5px solid transparent;
+  transform: scale(1);
 }
 
 .incident-list-item:hover {
-  background-color: #e9ecef;
+  background-color: var(--bg-hover);
   transform: scale(1.02);
 }
 
 .incident-list-item.selected {
-  background-color: #0d6efd;
+  background-color: #2a3a4e; /* A muted blue for selection */
+  border-left-color: var(--accent-color);
   color: white;
-  border-color: #0d6efd;
+  transform: scale(1.02);
 }
 
 .incident-list-item p {
-  margin: 4px 0;
+  margin: 0;
 }
 
+.incident-list-item p:first-of-type {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.incident-list-item p:last-of-type {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* --- Urgency Tags --- */
 .urgency-tag {
   display: inline-block;
-  margin-top: 8px;
-  font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: white;
-  font-size: 0.8em;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
 }
 
-.urgency-Life-threatening { background-color: #dc3545; }
-.urgency-Urgent { background-color: #ffc107; color: black; }
-.urgency-Minor { background-color: #198754; }
+.urgency-Life-threatening {
+  background-color: var(--urgency-life-threatening);
+  animation: pulse 1.5s infinite;
+}
+.urgency-Urgent { background-color: var(--urgency-urgent); }
+.urgency-Minor { background-color: var(--urgency-minor); }
+
+/* --- Details Panel --- */
+.details-panel > div {
+    animation: fadeIn 0.5s ease-in-out;
+}
 
 .details-panel p {
-  margin: 5px 0 15px 0;
+  margin: 0 0 1.25rem 0;
+  line-height: 1.5;
+}
+
+.details-panel strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
 }
 
 .route-info {
-  margin-top: 20px;
-  border-top: 2px solid #dee2e6;
-  padding-top: 15px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
 }
 
-.route-info h3 {
-  margin-top: 0;
-}
-
+/* --- Utility & Loading States --- */
 .loading-text {
-  color: #6c757d;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: var(--text-secondary);
+}
+
+.loading-container::before {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin-bottom: 1rem;
+  border: 5px solid var(--bg-tertiary);
+  border-top-color: var(--accent-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(230, 57, 70, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(230, 57, 70, 0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.incident-list-item:nth-child(1) { animation-delay: 0.1s; }
+.incident-list-item:nth-child(2) { animation-delay: 0.15s; }
+.incident-list-item:nth-child(3) { animation-delay: 0.2s; }
+.incident-list-item:nth-child(4) { animation-delay: 0.25s; }
+.incident-list-item:nth-child(5) { animation-delay: 0.3s; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes rotateGradient { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+
+/* --- KEYFRAME ANIMATIONS --- */
+@keyframes scanline {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes breath-and-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px var(--urgency-life-threatening), 0 0 0 0 rgba(230, 57, 70, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px 3px var(--urgency-life-threatening), 0 0 0 12px rgba(230, 57, 70, 0);
+  }
+}
+
+@keyframes glow-urgent {
+  0%, 100% { box-shadow: 0 0 4px var(--urgency-urgent); }
+  50% { box-shadow: 0 0 12px 2px var(--urgency-urgent); }
+}
+
+@keyframes glow-minor {
+  0%, 100% { box-shadow: 0 0 3px var(--urgency-minor); }
+  50% { box-shadow: 0 0 8px 1px var(--urgency-minor); }
+}
+h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden; /* Important for the animation */
+  padding-bottom: 12%;
+}
+
+/* The new "Emergency Scanline" animation */
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--urgency-life-threatening), transparent);
+  animation: scanline 4s linear infinite;
+  animation-delay: 1s; /* Start after a moment */
 }

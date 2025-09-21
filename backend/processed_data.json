@@ -143,26 +143,7 @@
             "hyperbolic language"
         ]
     },
-    {
-        "id": 10,
-        "original_message": "Free rescue boats for all Mumbai citizens! Click here to register your location and get help fast: tiny.url/fake-rescue-link",
-        "location_text": "Unknown",
-        "urgency": "Minor",
-        "need_type": "Rescue",
-        "summary": "A message offering free rescue boats in Mumbai with a suspicious link.",
-        "severity_score": 7,
-        "coordinates": {
-            "lat": 18.9581934,
-            "lng": 72.8320729
-        },
-        "authenticity_score": 1,
-        "reasoning": "The message contains a spam link and uses generic language suggesting a likely phishing attempt.",
-        "flags": [
-            "spam link",
-            "vague location",
-            "generic plea"
-        ]
-    },
+    
     {
         "id": 11,
         "original_message": "My basement is flooded. What should I do?",
