@@ -1,8 +1,9 @@
 # Disaster Response Dashboard v2.0 🚨🚁
 
 **A Next-Gen, AI-Powered Command Center for Urban Emergency Management.**
+<img width="1914" height="1078" alt="Screenshot 2026-02-10 at 9 36 43 PM" src="https://github.com/user-attachments/assets/1716ad98-cf97-494d-8604-968b7a0802f9" />
 
-![Disaster Response Dashboard](https://img.shields.io/badge/Status-Live-green) ![React](https://img.shields.io/badge/Frontend-React-blue) ![Flask](https://img.shields.io/badge/Backend-Flask-black) ![Gemini AI](https://img.shields.io/badge/AI-Gemini%201.5-purple)
+
 
 ## 📖 Overview
 
