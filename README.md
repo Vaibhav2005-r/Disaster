@@ -78,11 +78,6 @@ REACT_APP_GOOGLE_MAPS_API_KEY=your_key_here
 ```bash
 npm start
 ```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ---
 
 **Developed by Vaibhav** | *Engineering a Safer Tomorrow*
