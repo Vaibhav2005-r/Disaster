@@ -79,10 +79,6 @@ REACT_APP_GOOGLE_MAPS_API_KEY=your_key_here
 npm start
 ```
 
-## 📸 Screenshots
-
-*(Add screenshots of your dashboard here)*
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
