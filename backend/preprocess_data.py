@@ -1,51 +1,96 @@
-import csv
 import json
-from ai_core import process_sos_message
+import random
+from datetime import datetime, timedelta
 
-INPUT_CSV_FILE = "sos_messages.csv"
+# --- CONFIGURATION ---
 OUTPUT_JSON_FILE = "processed_data.json"
 
-def preprocess_and_save():
-    """
-    Reads the raw CSV data, processes each message through the AI core,
-    and saves the complete, structured results to a JSON file.
-    This script should only be run once, or whenever the CSV data changes.
-    """
-    # 1. Load the raw messages from the CSV
-    raw_messages = []
-    try:
-        with open(INPUT_CSV_FILE, mode='r', encoding='utf-8') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                raw_messages.append(row)
-    except FileNotFoundError:
-        print(f"FATAL: The input file {INPUT_CSV_FILE} was not found. Exiting.")
-        return
-
-    print(f"--- Starting Pre-processing of {len(raw_messages)} messages ---")
+# --- DATASETS ---
+LOCATIONS = [
+    # SOUTH MUMBAI
+    {"name": "Colaba Causeway", "lat": 18.9100, "lng": 72.8250, "area": "Colaba"},
+    {"name": "Gateway of India", "lat": 18.9220, "lng": 72.8347, "area": "Colaba"},
+    {"name": "Marine Drive", "lat": 18.9440, "lng": 72.8230, "area": "Marine Lines"},
+    {"name": "CST Station", "lat": 18.9400, "lng": 72.8350, "area": "Fort"},
+    {"name": "Girgaon Chowpatty", "lat": 18.9520, "lng": 72.8180, "area": "Girgaon"},
     
-    all_processed_data = []
-    # 2. Loop through each message and process it
-    for item in raw_messages:
-        message_id = int(item['id'])
-        text = item['message']
-        
-        # This calls the full AI pipeline from ai_core.py
-        processed_data = process_sos_message(message_id, text)
-        
-        # Important: Add the result to our list even if it failed,
-        # so we know what's being skipped. We will filter later.
-        if processed_data:
-            all_processed_data.append(processed_data)
+    # CENTRAL MUMBAI
+    {"name": "Dadar Station", "lat": 19.0180, "lng": 72.8430, "area": "Dadar"},
+    {"name": "Sion Hospital", "lat": 19.0400, "lng": 72.8600, "area": "Sion"},
+    {"name": "Worli Sea Face", "lat": 19.0100, "lng": 72.8150, "area": "Worli"},
+    {"name": "Lower Parel", "lat": 18.9950, "lng": 72.8300, "area": "Lower Parel"},
+    {"name": "Dharavi", "lat": 19.0380, "lng": 72.8530, "area": "Dharavi"},
 
-    # 3. Save the results to the output JSON file
-    with open(OUTPUT_JSON_FILE, 'w', encoding='utf-8') as f:
-        json.dump(all_processed_data, f, indent=4)
+    # WESTERN SUBURBS
+    {"name": "Bandra Bandstand", "lat": 19.0550, "lng": 72.8200, "area": "Bandra West"},
+    {"name": "Juhu Beach", "lat": 19.0980, "lng": 72.8260, "area": "Juhu"},
+    {"name": "Andheri Station", "lat": 19.1136, "lng": 72.8450, "area": "Andheri"},
+    {"name": "Versova", "lat": 19.1300, "lng": 72.8150, "area": "Versova"},
+    {"name": "Goregaon Hub Mall", "lat": 19.1650, "lng": 72.8500, "area": "Goregaon"},
+    {"name": "Infinity Mall", "lat": 19.1840, "lng": 72.8350, "area": "Malad West"},
+    {"name": "Kandivali Station", "lat": 19.2050, "lng": 72.8550, "area": "Kandivali"},
+    {"name": "Borivali National Park", "lat": 19.2300, "lng": 72.8600, "area": "Borivali"},
+
+    # EASTERN SUBURBS & HARBOUR
+    {"name": "Phoenix Marketcity", "lat": 19.0860, "lng": 72.8890, "area": "Kurla"},
+    {"name": "R City Mall", "lat": 19.0990, "lng": 72.9150, "area": "Ghatkopar"},
+    {"name": "Powai Lake", "lat": 19.1200, "lng": 72.9050, "area": "Powai"},
+    {"name": "Vikhroli Station", "lat": 19.1100, "lng": 72.9300, "area": "Vikhroli"},
+    {"name": "Mulund Check Naka", "lat": 19.1750, "lng": 72.9600, "area": "Mulund"},
+    {"name": "Chembur Monorail", "lat": 19.0600, "lng": 72.8900, "area": "Chembur"},
+]
+
+SCENARIOS = [
+    {"type": "Medical Emergency", "severity": 8, "desc": "Severe cardiac arrest patient collapsed on road.", "needs": ["Medical", "Ambulance"]},
+    {"type": "Fire", "severity": 9, "desc": "Massive fire broke out in a commercial building.", "needs": ["Fire", "Rescue"]},
+    {"type": "Accident", "severity": 7, "desc": "Car collision with multiple injuries reported.", "needs": ["Medical", "Police"]},
+    {"type": "Flooding", "severity": 6, "desc": "Water logging blocking main access road.", "needs": ["Police", "Rescue"]},
+    {"type": "Riot Control", "severity": 8, "desc": "Public disturbance and crowd gathering aggressively.", "needs": ["Police", "Crowd Control"]},
+    {"type": "Structure Collapse", "severity": 10, "desc": "Old building collapsed, people trapped under debris.", "needs": ["Fire", "Medical", "Police", "NDRF"]},
+    {"type": "Gas Leak", "severity": 9, "desc": "Toxic gas smell reported near residential area.", "needs": ["Fire", "Evacuation"]},
+    {"type": "Animal Rescue", "severity": 4, "desc": "Stray leopard spotted near residential complex.", "needs": ["Forest Dept", "Police"]},
+    {"type": "Tree Fall", "severity": 5, "desc": "Huge tree fell on a parked car, blocking traffic.", "needs": ["Fire", "Municipality"]},
+]
+
+def generate_data():
+    print("--- Generating Pan-Mumbai Disaster Data ---")
+    data = []
+    
+    # Generate 50 incidents
+    for i in range(1, 51):
+        loc = random.choice(LOCATIONS)
+        # Add slight random jitter to location so they don't stack perfectly
+        lat_jitter = random.uniform(-0.005, 0.005)
+        lng_jitter = random.uniform(-0.005, 0.005)
         
-    print(f"\n--- Pre-processing Complete ---")
-    print(f"Successfully processed and saved data to {OUTPUT_JSON_FILE}")
-    print("You can now run app.py to serve this static data.")
+        scenario = random.choice(SCENARIOS)
+        
+        # Authenticity Score (Weighted towards high)
+        auth_score = random.choices([3, 5, 7, 8, 9, 10], weights=[5, 10, 20, 30, 20, 15])[0]
+
+        incident = {
+            "id": i,
+            "original_message": f"SOS! {scenario['desc']} at {loc['name']}.",
+            "category": scenario['type'],
+            "priority": "Critical" if scenario['severity'] >= 8 else "High" if scenario['severity'] >= 6 else "Moderate",
+            "severity_score": scenario['severity'],
+            "authenticity_score": auth_score,
+            "location": f"{loc['name']}, {loc['area']}, Mumbai",
+            "coordinates": {
+                "lat": loc['lat'] + lat_jitter,
+                "lng": loc['lng'] + lng_jitter
+            },
+            "need_type": scenario['needs'],
+            "timestamp": (datetime.now() - timedelta(minutes=random.randint(1, 120))).isoformat()
+        }
+        data.append(incident)
+
+    # Save to file
+    with open(OUTPUT_JSON_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=4)
+    
+    print(f"Successfully generated {len(data)} incidents across {len(LOCATIONS)} key locations.")
+    print(f"Saved to {OUTPUT_JSON_FILE}")
 
 if __name__ == '__main__':
-    # Make sure your API keys are set as environment variables before running this!
-    preprocess_and_save()
+    generate_data()

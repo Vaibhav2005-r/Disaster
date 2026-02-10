@@ -1,35 +1,46 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { APIProvider, Map, AdvancedMarker, Pin, useMap } from '@vis.gl/react-google-maps';
 import { decode } from '@googlemaps/polyline-codec';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AlertCircle, MapPin, Navigation, Activity, Shield, Flame, Truck, AlertTriangle } from 'lucide-react';
+import ReportModal from './ReportModal';
+import VehicleDetailPanel from './VehicleDetailPanel';
+import IncidentDetailPanel from './IncidentDetailPanel';
+import FleetDropdown from './FleetDropdown';
+import { findPath } from './MumbaiNavigationGraph';
+import IntroOverlay from './IntroOverlay';
 import './App.css';
 
-// --- NEW COMPONENT to toggle the Traffic Layer ---
-function TrafficControl() {
+// --- CONTROLS COMPONENT ---
+function MapControls({ showTraffic, setShowTraffic }) {
   const map = useMap();
-  const [trafficLayer, setTrafficLayer] = useState(null);
+  const trafficLayerRef = useRef(null);
 
   useEffect(() => {
     if (!map) return;
-    const layer = new window.google.maps.TrafficLayer();
-    setTrafficLayer(layer);
+    trafficLayerRef.current = new window.google.maps.TrafficLayer();
   }, [map]);
 
-  const toggleTraffic = (e) => {
-    if (e.target.checked) {
-      trafficLayer?.setMap(map);
+  useEffect(() => {
+    if (!map || !trafficLayerRef.current) return;
+    if (showTraffic) {
+      trafficLayerRef.current.setMap(map);
     } else {
-      trafficLayer?.setMap(null);
+      trafficLayerRef.current.setMap(null);
     }
-  };
+  }, [showTraffic, map]);
 
   return (
-    <div style={{
-      position: 'absolute', top: 10, left: '50%', transform: 'translateX(-50%)',
-      backgroundColor: 'white', padding: '8px', borderRadius: '5px',
-      boxShadow: '0 2px 6px rgba(0,0,0,0.3)', zIndex: 10, display: 'flex', alignItems: 'center'
-    }}>
-      <input type="checkbox" id="traffic" onChange={toggleTraffic} />
-      <label htmlFor="traffic" style={{ marginLeft: '5px', fontWeight: 'bold' }}>Show Traffic</label>
+    <div className="map-controls">
+      <label className="toggle-switch">
+        <input
+          type="checkbox"
+          checked={showTraffic}
+          onChange={(e) => setShowTraffic(e.target.checked)}
+        />
+        <span className="slider round"></span>
+        <span className="label-text">Traffic</span>
+      </label>
     </div>
   );
 }
@@ -43,12 +54,15 @@ function RoutePolyline({ path }) {
     if (!map) return;
     if (!polylineRef.current) {
       polylineRef.current = new window.google.maps.Polyline({
-        geodesic: true, strokeColor: '#0d6efd', strokeOpacity: 0.8, strokeWeight: 4,
+        geodesic: true,
+        strokeColor: '#3b82f6', // Modern blue
+        strokeOpacity: 0.8,
+        strokeWeight: 6,
       });
       polylineRef.current.setMap(map);
     }
     if (path && path.length > 0) {
-      polylineRef.current.setPath(path.map(([lat, lng]) => ({ lat, lng })));
+      polylineRef.current.setPath(path.map(({ lat, lng }) => ({ lat, lng })));
     } else {
       polylineRef.current.setPath([]);
     }
@@ -57,113 +71,406 @@ function RoutePolyline({ path }) {
   return null;
 }
 
+// --- CLOCK COMPONENT ---
+function DigitalClock() {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="digital-clock">
+      <div className="clock-time">
+        {time.toLocaleTimeString('en-US', { hour12: false })}
+      </div>
+      <div className="clock-date">
+        {time.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase()}
+      </div>
+    </div>
+  );
+}
+
 // --- MAIN APP COMPONENT ---
 function App() {
+  const [showIntro, setShowIntro] = useState(false); // Disabled by user request
   const [sosData, setSosData] = useState([]);
   const [selectedIncident, setSelectedIncident] = useState(null);
+  const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [routeInfo, setRouteInfo] = useState(null);
   const [decodedPath, setDecodedPath] = useState([]);
   const [loading, setLoading] = useState(true);
   const [nearbyPlaces, setNearbyPlaces] = useState({ hospitals: [], police_stations: [], fire_stations: [] });
+  const [showTraffic, setShowTraffic] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [error, setError] = useState(null);
+  const [situation, setSituation] = useState({ temp: "--", cond: "Loading...", insight: "Connecting to AI satellite..." });
 
-  useEffect(() => {
-    fetch('http://127.0.0.1:5000/get_sos_data')
-      .then(res => res.json()).then(data => { setLoading(false); setSosData(data); })
-      .catch(err => { console.error("Error fetching SOS data:", err); setLoading(false); });
-  }, []);
+  // --- SMART DISPATCH SYSTEM ---
+  const [resources, setResources] = useState([
+    {
+      id: 'amb-1', type: 'ambulance', status: 'IDLE', lat: 19.0760, lng: 72.8777, name: 'Ambulance 1',
+      details: { driver: 'Ramesh K.', contact: '9820098200', capacity: '2 Patients', equipment: 'ALS' }
+    },
+    {
+      id: 'amb-2', type: 'ambulance', status: 'IDLE', lat: 19.0200, lng: 72.8400, name: 'Ambulance 2',
+      details: { driver: 'Suresh P.', contact: '9820098201', capacity: '1 Patient', equipment: 'BLS' }
+    },
+    {
+      id: 'pol-1', type: 'police', status: 'IDLE', lat: 19.0800, lng: 72.8900, name: 'Patrol Alpha',
+      details: { driver: 'Insp. Patil', contact: '100-22', capacity: '4 Officers', equipment: 'Riot Gear' }
+    },
+    {
+      id: 'fire-1', type: 'fire', status: 'IDLE', lat: 19.0600, lng: 72.8500, name: 'Fire Engine 4',
+      details: { driver: 'Chief Rane', contact: '101-44', capacity: '3000L Water', equipment: 'Ladder' }
+    }
+  ]);
 
-  const handleIncidentSelect = (incident) => {
-    setSelectedIncident(incident);
-    setRouteInfo(null);
-    setDecodedPath([]);
-    setNearbyPlaces({ hospitals: [], police_stations: [], fire_stations: [] });
-
-    const { lat, lng } = incident.coordinates;
-    fetch(`http://127.0.0.1:5000/get_route?lat=${lat}&lng=${lng}`)
-      .then(res => res.json()).then(data => {
-        setRouteInfo(data);
-        if (data.overview_polyline) setDecodedPath(decode(data.overview_polyline, 5));
-      }).catch(err => console.error("Error fetching route data:", err));
-    fetch(`http://127.0.0.1:5000/get_nearby_places?lat=${lat}&lng=${lng}`)
-      .then(res => res.json()).then(data => setNearbyPlaces(data))
-      .catch(err => console.error("Error fetching nearby places:", err));
+  const handleIntroComplete = () => {
+    setShowIntro(false);
   };
 
-  const getPinColor = (urgency) => {
-    switch (urgency) {
-      case 'Life-threatening': return '#dc3545';
-      case 'Urgent': return '#ffc107';
-      case 'Minor': return '#198754';
-      default: return '#6c757d';
+  useEffect(() => {
+    // 1. Fetch Realtime AI Situation Report
+    fetch('http://127.0.0.1:5001/get_situation_update')
+      .then(res => res.json())
+      .then(data => {
+        if (data.temperature) {
+          setSituation({
+            temp: data.temperature,
+            cond: data.condition,
+            insight: data.insight
+          });
+        }
+      })
+      .catch(err => console.error("Error fetching situation report:", err));
+
+    // 2. Fetch SOS Data
+    fetch('http://127.0.0.1:5001/get_sos_data')
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to connect to backend");
+        return res.json();
+      })
+      .then(data => {
+        setLoading(false);
+        const sortedData = data.sort((a, b) => new Date(a.timestamp || 0) - new Date(b.timestamp || 0));
+
+        let currentIndex = 0;
+        setSosData(sortedData.slice(0, 3));
+        currentIndex = 3;
+
+        const interval = setInterval(() => {
+          if (currentIndex < sortedData.length) {
+            const newItem = sortedData[currentIndex];
+            if (newItem) {
+              setSosData(prev => [newItem, ...prev]);
+            }
+            currentIndex++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 3000);
+
+        return () => clearInterval(interval);
+      })
+      .catch(err => {
+        console.error("Error fetching SOS data:", err);
+        setError("Could not load disaster data. Is the backend running?");
+        setLoading(false);
+      });
+  }, []);
+
+  // Helper: Fetch Route in Background
+  const fetchRouteForVehicle = async (vehicle, target) => {
+    try {
+      const res = await fetch(`http://127.0.0.1:5001/get_route?lat=${target.coordinates.lat}&lng=${target.coordinates.lng}&start_lat=${vehicle.lat}&start_lng=${vehicle.lng}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.overview_polyline) {
+          const decoded = decode(data.overview_polyline);
+          const newPath = decoded.map(([lat, lng]) => ({ lat, lng }));
+
+          // Update vehicle with path once loaded
+          setResources(prev => prev.map(r => {
+            if (r.id === vehicle.id) {
+              return { ...r, path: newPath };
+            }
+            return r;
+          }));
+        }
+      }
+    } catch (err) {
+      console.error("Routing Error:", err);
+      // Fallback path (straight line) already handled if path is empty
+      setResources(prev => prev.map(r => {
+        if (r.id === vehicle.id) {
+          return { ...r, path: [{ lat: vehicle.lat, lng: vehicle.lng }, target.coordinates] };
+        }
+        return r;
+      }));
     }
   };
 
-  if (loading) return <div style={{textAlign: 'center', marginTop: '50px'}}><h1>Loading Disaster Data...</h1></div>;
+  const assignVehicle = (vehicleId, incidentId) => {
+    const vehicle = resources.find(r => r.id === vehicleId);
+    if (!vehicle) return;
+
+    // 1. Optimistic Update (Instant Feedback)
+    setResources(prev => prev.map(res => {
+      if (res.id === vehicleId) {
+        return {
+          ...res,
+          status: incidentId ? 'DISPATCHED' : 'IDLE',
+          target_incident_id: incidentId,
+          path: [], // Reset path until loaded
+          pathIndex: 0
+        };
+      }
+      return res;
+    }));
+
+    if (incidentId) {
+      setSosData(prev => prev.map(inc => {
+        if (inc.id === incidentId) {
+          return { ...inc, assigned_vehicle: vehicleId };
+        }
+        return inc;
+      }));
+
+      // 2. Trigger Route Fetch
+      const target = sosData.find(i => i.id === incidentId);
+      if (target && target.coordinates) {
+        fetchRouteForVehicle(vehicle, target);
+      }
+    }
+  };
+
+  // AUTO DISPATCH LOGIC
+  useEffect(() => {
+    sosData.forEach(incident => {
+      if (incident.severity_score >= 7 && !incident.assigned_vehicle) {
+        let requiredType = 'police';
+        if (incident.need_type?.includes('Medical')) requiredType = 'ambulance';
+        if (incident.need_type?.includes('Fire')) requiredType = 'fire';
+
+        const availableVehicles = resources.filter(r => r.type === requiredType && r.status === 'IDLE');
+
+        if (availableVehicles.length > 0) {
+          let nearest = availableVehicles[0];
+          let minDist = 9999;
+
+          availableVehicles.forEach(v => {
+            const d = Math.sqrt(Math.pow(v.lat - incident.coordinates.lat, 2) + Math.pow(v.lng - incident.coordinates.lng, 2));
+            if (d < minDist) {
+              minDist = d;
+              nearest = v;
+            }
+          });
+          assignVehicle(nearest.id, incident.id);
+        }
+      }
+    });
+  }, [sosData]);
+
+  // SIMULATE MOVEMENT (Following Path)
+  useEffect(() => {
+    const moveInterval = setInterval(() => {
+      setResources(prev => prev.map(res => {
+        if (res.status === 'DISPATCHED' && res.path && res.path.length > 0) {
+          const targetNode = res.path[res.pathIndex];
+          if (!targetNode) return res;
+
+          const dx = targetNode.lat - res.lat;
+          const dy = targetNode.lng - res.lng;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          const speed = 0.0001; // Realistic speed
+
+          if (dist < speed) {
+            const nextIndex = res.pathIndex + 1;
+            if (nextIndex >= res.path.length) {
+              return { ...res, status: 'BUSY', path: [] };
+            }
+            return { ...res, lat: targetNode.lat, lng: targetNode.lng, pathIndex: nextIndex };
+          } else {
+            const ratio = speed / dist;
+            return { ...res, lat: res.lat + dx * ratio, lng: res.lng + dy * ratio };
+          }
+        }
+        return res;
+      }));
+    }, 100);
+
+    return () => clearInterval(moveInterval);
+  }, []);
+
+  const handleReportSubmit = (reportData) => {
+    const newIncident = {
+      id: sosData.length + 1,
+      category: reportData.category,
+      original_message: reportData.description,
+      priority: "High",
+      severity_score: 8, // Default high severity for manual reports
+      authenticity_score: 10,
+      timestamp: new Date().toISOString(),
+      location: "Manual Report",
+      status: "Open",
+      coordinates: { lat: 19.0760, lng: 72.8777 }, // Default center for now
+      need_type: [reportData.category]
+    };
+    setSosData(prev => [newIncident, ...prev]);
+    setShowReportModal(false);
+  };
+
+  const mumbaiCenter = { lat: 19.0760, lng: 72.8777 };
 
   return (
-    <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} libraries={['maps', 'places']}>
+    <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+      <AnimatePresence>
+        {showIntro && <IntroOverlay onComplete={handleIntroComplete} />}
+      </AnimatePresence>
+
       <div className="app-container">
-        
-        {/* --- LEFT SIDEBAR: INCIDENT LIST --- */}
-        <div className="sidebar">
-          <h2>Incoming SOS Feed</h2>
-          {sosData.map(incident => (
-            <div 
-              key={incident.id} 
-              className={`incident-list-item ${selectedIncident?.id === incident.id ? 'selected' : ''}`}
-              onClick={() => handleIncidentSelect(incident)}
-            >
-              <p><strong>{incident.location_text}</strong></p>
-              <p>{incident.summary}</p>
-              <span className={`urgency-tag urgency-${incident.urgency.replace(' ','-')}`}>{incident.urgency}</span>
+        {/* HEADER */}
+        <header className="app-header glass">
+          <div className="logo-area">
+            <Activity className="pulse-icon" />
+            <h1>MUMBAI DISASTER RESPONSE</h1>
+          </div>
+
+          <div className="header-stats">
+            <DigitalClock />
+            <div className="stat-item pulse-stat">
+              <span className="stat-label">LIVE STATUS</span>
+              <span className="stat-value text-green">ONLINE</span>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* --- CENTER: MAP --- */}
-        <div className="map-container">
-          <Map defaultCenter={{ lat: 19.0760, lng: 72.8777 }} defaultZoom={11} mapId="disaster-map">
-            <TrafficControl />
-            {sosData.map(incident => (
-              <AdvancedMarker key={incident.id} position={incident.coordinates} onClick={() => handleIncidentSelect(incident)}>
-                <Pin background={getPinColor(incident.urgency)} borderColor={'#000'} glyphColor={'#000'} />
-              </AdvancedMarker>
-            ))}
-            <RoutePolyline path={decodedPath} />
-            {nearbyPlaces.hospitals.map((place, index) => (
-              <AdvancedMarker key={`h-${index}`} position={place.location} title={place.name}><Pin background={'#ffffff'} borderColor={'#000000'} glyph={'H'} /></AdvancedMarker>
-            ))}
-            {nearbyPlaces.police_stations.map((place, index) => (
-              <AdvancedMarker key={`p-${index}`} position={place.location} title={place.name}><Pin background={'#0d6efd'} borderColor={'#ffffff'} glyph={'P'} /></AdvancedMarker>
-            ))}
-            {nearbyPlaces.fire_stations.map((place, index) => (
-              <AdvancedMarker key={`f-${index}`} position={place.location} title={place.name}><Pin background={'#ff7c00'} borderColor={'#ffffff'} glyph={'F'} /></AdvancedMarker>
-            ))}
-          </Map>
-        </div>
+          <div className="header-actions">
+            <button className="report-btn-header" onClick={() => setShowReportModal(true)}>
+              <AlertTriangle size={18} />
+              REPORT INCIDENT
+            </button>
+            <FleetDropdown resources={resources} onSelect={(res) => { setSelectedVehicle(res); setSelectedIncident(null); }} />
+          </div>
+        </header>
 
-        {/* --- RIGHT SIDEBAR: DETAILS PANEL --- */}
-        <div className="sidebar details-panel">
-          <h2>Incident Details</h2>
-          {selectedIncident ? (
-            <div>
-              <p><strong>Message:</strong><br/>{selectedIncident.original_message}</p>
-              <p><strong>Need Type:</strong> {selectedIncident.need_type}</p>
-              <p><strong>Severity Score:</strong> {selectedIncident.severity_score}</p>
-              <p><strong>AI Authenticity:</strong> {selectedIncident.authenticity_score}/10</p>
-              <p><strong>AI Reasoning:</strong> {selectedIncident.reasoning}</p>
-              <div className="route-info">
-                <h3>Route from Rescue HQ</h3>
-                {routeInfo ? (
-                  <div>
-                    <p><strong>Distance:</strong> {routeInfo.distance}</p>
-                    <p><strong>Estimated Time:</strong> {routeInfo.duration}</p>
-                  </div>
-                ) : (<p className="loading-text">Calculating route...</p>)}
+        <div className="main-content">
+          {/* SIDEBAR */}
+          <div className="sidebar left-sidebar glass">
+            {/* --- WEATHER CARD --- */}
+            <div className="weather-card">
+              <div className="weather-header">
+                <h3><span className="live-dot"></span> MUMBAI LIVE</h3>
+                <span>{situation.temp}</span>
+              </div>
+              <div className="weather-details">
+                <span className="weather-cond">{situation.cond}</span>
+                <p className="weather-insight">"{situation.insight}"</p>
               </div>
             </div>
-          ) : (<p className="loading-text">Select an incident from the list or map.</p>)}
+
+            <h2>Live SOS Feed</h2>
+            <div className="sos-feed">
+              {loading ? <p>Loading data...</p> : sosData.map(item => (
+                <motion.div
+                  key={item.id}
+                  className={`sos-card priority-${item.priority.toLowerCase()}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  onClick={() => setSelectedIncident(item)}
+                >
+                  <div className="sos-header">
+                    <span className={`category-badge ${item.urgency ? item.urgency.toLowerCase() : 'minor'}`}>{item.category}</span>
+                    <span className="time">{new Date(item.timestamp).toLocaleTimeString()}</span>
+                  </div>
+                  <p className="sos-msg">{item.original_message}</p>
+                  <div className="sos-meta">
+                    <span><MapPin size={12} /> {item.location_text || item.location}</span>
+                    <div className="severity-bar">
+                      <div className="fill" style={{
+                        width: `${item.severity_score * 10}%`,
+                        backgroundColor: item.severity_score > 7 ? '#ef4444' : item.severity_score > 4 ? '#f59e0b' : '#10b981'
+                      }}></div>
+                    </div>
+                  </div>
+                  {item.assigned_vehicle && <div className="assigned-badge"><Truck size={12} /> Unit Dispatched</div>}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* MAP AREA */}
+          <div className="map-wrapper">
+            <Map
+              defaultCenter={mumbaiCenter}
+              defaultZoom={12}
+              mapId="4f65c879d6c34275"
+              disableDefaultUI={true}
+              className="google-map"
+            >
+              <MapControls showTraffic={showTraffic} setShowTraffic={setShowTraffic} />
+
+              {/* Incident Markers */}
+              {sosData.map(incident => (
+                <AdvancedMarker
+                  key={incident.id}
+                  position={incident.coordinates}
+                  onClick={() => setSelectedIncident(incident)}
+                >
+                  <div className={`custom-marker ${incident.priority.toLowerCase()} ${selectedIncident?.id === incident.id ? 'selected' : ''}`}>
+                    <AlertCircle size={20} color="white" />
+                  </div>
+                </AdvancedMarker>
+              ))}
+
+              {/* Resource Markers */}
+              {resources.map(res => (
+                <AdvancedMarker
+                  key={res.id}
+                  position={{ lat: res.lat, lng: res.lng }}
+                  onClick={() => setSelectedVehicle(res)}
+                >
+                  <div className={`resource-marker ${res.type} ${res.status.toLowerCase()}`}>
+                    {res.type === 'ambulance' && <Activity size={16} color="white" />}
+                    {res.type === 'police' && <Shield size={16} color="white" />}
+                    {res.type === 'fire' && <Flame size={16} color="white" />}
+                  </div>
+                </AdvancedMarker>
+              ))}
+
+              {/* Route Polyline */}
+              {resources.map(res => (
+                res.status === 'DISPATCHED' && res.path && (
+                  <RoutePolyline
+                    key={res.id}
+                    path={res.path.map(p => [p.lat, p.lng])}
+                  />
+                )
+              ))}
+            </Map>
+          </div>
         </div>
+
+        {/* MODALS & PANELS */}
+        <ReportModal
+          isOpen={showReportModal}
+          onClose={() => setShowReportModal(false)}
+          onSubmit={handleReportSubmit}
+        />
+        <VehicleDetailPanel
+          vehicle={selectedVehicle}
+          onClose={() => setSelectedVehicle(null)}
+          onAssign={assignVehicle}
+          incidents={sosData}
+        />
+        <IncidentDetailPanel
+          incident={selectedIncident}
+          onClose={() => setSelectedIncident(null)}
+          onAssign={assignVehicle}
+          vehicles={resources}
+        />
       </div>
     </APIProvider>
   );

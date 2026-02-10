@@ -1,181 +1,912 @@
 [
     {
         "id": 1,
-        "original_message": "Part of the sea wall has collapsed near the Gateway of India. Water is rushing in. We need immediate evacuation from the waterfront shops! #MumbaiDeluge",
-        "location_text": "near the Gateway of India",
-        "urgency": "Life-threatening",
-        "need_type": "Rescue",
-        "summary": "Sea wall collapse near Gateway of India requires immediate evacuation of waterfront shops due to rushing water.",
-        "severity_score": 15,
+        "original_message": "SOS! Massive fire broke out in a commercial building. at Dadar Station.",
+        "category": "Fire",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 8,
+        "location": "Dadar Station, Dadar, Mumbai",
         "coordinates": {
-            "lat": 18.9219841,
-            "lng": 72.8346543
+            "lat": 19.014918223351575,
+            "lng": 72.83898122295304
         },
-        "authenticity_score": 9,
-        "reasoning": "The message provides a specific location, describes a credible disaster scenario, and uses a relevant hashtag, indicating a high likelihood of authenticity.",
-        "flags": []
+        "need_type": [
+            "Fire",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T19:36:33.504676"
     },
     {
         "id": 2,
-        "original_message": "My grandfather is having a heart attack at our home in Colaba Causeway. We can't get out due to flooding. Need an ambulance urgently. Apartment 4B, Causeway House.",
-        "location_text": null,
-        "urgency": null,
-        "need_type": null,
-        "summary": null,
-        "severity_score": 0,
-        "coordinates": null,
-        "authenticity_score": null,
-        "reasoning": null,
-        "flags": []
+        "original_message": "SOS! Car collision with multiple injuries reported. at Mulund Check Naka.",
+        "category": "Accident",
+        "priority": "High",
+        "severity_score": 7,
+        "authenticity_score": 9,
+        "location": "Mulund Check Naka, Mulund, Mumbai",
+        "coordinates": {
+            "lat": 19.170893167229437,
+            "lng": 72.96294969334393
+        },
+        "need_type": [
+            "Medical",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:14:33.504694"
     },
     {
         "id": 3,
-        "original_message": "We are a group of 50 people stranded on the upper floor of Phoenix Marketcity mall in Kurla. Power is out, but we are safe for now. Need food and water supplies.",
-        "location_text": "Phoenix Marketcity mall in Kurla",
-        "urgency": "Urgent",
-        "need_type": "Supplies",
-        "summary": "Fifty people are stranded on the upper floor of Phoenix Marketcity mall in Kurla due to a power outage and need food and water.",
-        "severity_score": 7,
-        "coordinates": {
-            "lat": 19.0865033,
-            "lng": 72.88842319999999
-        },
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Marine Drive.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
         "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and number of people, indicating a higher likelihood of authenticity.",
-        "flags": []
+        "location": "Marine Drive, Marine Lines, Mumbai",
+        "coordinates": {
+            "lat": 18.948648536475872,
+            "lng": 72.81956374353967
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T17:56:33.504702"
     },
     {
         "id": 4,
-        "original_message": "KEM Hospital in Parel is running out of oxygen cylinders and blood bags. We have over 20 critical patients. Need immediate medical resupply.",
-        "location_text": "KEM Hospital in Parel",
-        "urgency": "Life-threatening",
-        "need_type": "Medical",
-        "summary": "KEM Hospital in Parel urgently needs oxygen cylinders and blood bags for over 20 critical patients.",
-        "severity_score": 15,
-        "coordinates": {
-            "lat": 19.0042672,
-            "lng": 72.8433945
-        },
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Andheri Station.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
         "authenticity_score": 9,
-        "reasoning": "The message provides specific location, urgent need, and quantifiable details (20 critical patients), suggesting high authenticity.",
-        "flags": []
+        "location": "Andheri Station, Andheri, Mumbai",
+        "coordinates": {
+            "lat": 19.117629557464817,
+            "lng": 72.84106485013997
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:48:33.504707"
     },
     {
         "id": 5,
-        "original_message": "The main road into Dharavi is blocked by a landslide. No vehicles can get in or out. Requesting heavy machinery to clear the debris.",
-        "location_text": "main road into Dharavi",
-        "urgency": "Urgent",
-        "need_type": "Infrastructure",
-        "summary": "A landslide has blocked the main road into Dharavi, requiring heavy machinery to clear debris and restore access.",
-        "severity_score": 9,
+        "original_message": "SOS! Water logging blocking main access road. at Chembur Monorail.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 9,
+        "location": "Chembur Monorail, Chembur, Mumbai",
         "coordinates": {
-            "lat": 19.0380334,
-            "lng": 72.8537589
+            "lat": 19.05620943799813,
+            "lng": 72.89205712936952
         },
-        "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and a plausible, urgent situation with a clear request, suggesting a high likelihood of authenticity.",
-        "flags": []
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T19:12:33.504710"
     },
     {
         "id": 6,
-        "original_message": "Our family of 4 needs food. We are in our flat near Powai Lake and have run out of everything. Not life-threatening yet, but we need help.",
-        "location_text": "near Powai Lake",
-        "urgency": "Urgent",
-        "need_type": "Food",
-        "summary": "A family of four near Powai Lake urgently needs food supplies.",
-        "severity_score": 7,
+        "original_message": "SOS! Huge tree fell on a parked car, blocking traffic. at Andheri Station.",
+        "category": "Tree Fall",
+        "priority": "Moderate",
+        "severity_score": 5,
+        "authenticity_score": 9,
+        "location": "Andheri Station, Andheri, Mumbai",
         "coordinates": {
-            "lat": 19.1272655,
-            "lng": 72.9048498
+            "lat": 19.11256703587199,
+            "lng": 72.84435799725803
         },
-        "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and a plausible scenario, though lacks extreme urgency that might signal a more critical situation.",
-        "flags": []
+        "need_type": [
+            "Fire",
+            "Municipality"
+        ],
+        "timestamp": "2026-02-10T19:16:33.504714"
     },
     {
         "id": 7,
-        "original_message": "Are there any government shelters open near Juhu Beach? We need to evacuate our home but don't know where to go.",
-        "location_text": "near Juhu Beach",
-        "urgency": "Urgent",
-        "need_type": "Shelter",
-        "summary": "Requesting information about available government shelters near Juhu Beach due to imminent evacuation.",
-        "severity_score": 8,
-        "coordinates": {
-            "lat": 19.1048146,
-            "lng": 72.8267098
-        },
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Vikhroli Station.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
         "authenticity_score": 8,
-        "reasoning": "The message is specific about location and need, showing genuine concern without spammy elements.",
-        "flags": []
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.112278309248758,
+            "lng": 72.92638400369377
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T19:37:33.504717"
     },
     {
         "id": 8,
-        "original_message": "Landline is down at Chhatrapati Shivaji Maharaj Terminus (CSMT). Can't contact railway authorities. This is a major communication failure.",
-        "location_text": "Chhatrapati Shivaji Maharaj Terminus (CSMT)",
-        "urgency": "Urgent",
-        "need_type": "Infrastructure",
-        "summary": "Communication failure at CSMT due to landline outage, preventing contact with railway authorities.",
-        "severity_score": 9,
-        "coordinates": {
-            "lat": 18.939078,
-            "lng": 72.835505
-        },
+        "original_message": "SOS! Huge tree fell on a parked car, blocking traffic. at Goregaon Hub Mall.",
+        "category": "Tree Fall",
+        "priority": "Moderate",
+        "severity_score": 5,
         "authenticity_score": 8,
-        "reasoning": "The message provides a specific location and a plausible problem, indicating a genuine infrastructure issue.",
-        "flags": []
+        "location": "Goregaon Hub Mall, Goregaon, Mumbai",
+        "coordinates": {
+            "lat": 19.163487313397336,
+            "lng": 72.85479190163277
+        },
+        "need_type": [
+            "Fire",
+            "Municipality"
+        ],
+        "timestamp": "2026-02-10T18:53:33.504720"
     },
     {
         "id": 9,
-        "original_message": "HELP!!! MUMBAI IS SINKING!!! WE ARE ALL DOOMED!!!! #MumbaiFloods #SOS",
-        "location_text": "Mumbai",
-        "urgency": "Life-threatening",
-        "need_type": "Rescue",
-        "summary": "Mumbai is experiencing severe flooding, requiring immediate rescue efforts.",
-        "severity_score": 15,
+        "original_message": "SOS! Severe cardiac arrest patient collapsed on road. at Marine Drive.",
+        "category": "Medical Emergency",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 10,
+        "location": "Marine Drive, Marine Lines, Mumbai",
         "coordinates": {
-            "lat": 18.9581934,
-            "lng": 72.8320729
+            "lat": 18.941171203895546,
+            "lng": 72.82577320627986
         },
-        "authenticity_score": 4,
-        "reasoning": "The message uses hyperbolic language ('sinking', 'doomed') and lacks specific location details, suggesting a possible exaggeration or lack of clear information.",
-        "flags": [
-            "vague location",
-            "hyperbolic language"
-        ]
+        "need_type": [
+            "Medical",
+            "Ambulance"
+        ],
+        "timestamp": "2026-02-10T19:15:33.504723"
     },
-    
+    {
+        "id": 10,
+        "original_message": "SOS! Public disturbance and crowd gathering aggressively. at Gateway of India.",
+        "category": "Riot Control",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 10,
+        "location": "Gateway of India, Colaba, Mumbai",
+        "coordinates": {
+            "lat": 18.926229197163185,
+            "lng": 72.82980382940175
+        },
+        "need_type": [
+            "Police",
+            "Crowd Control"
+        ],
+        "timestamp": "2026-02-10T18:52:33.504727"
+    },
     {
         "id": 11,
-        "original_message": "My basement is flooded. What should I do?",
-        "location_text": "Unknown",
-        "urgency": "Urgent",
-        "need_type": "Rescue",
-        "summary": "The sender's basement is flooded and requires assistance.",
-        "severity_score": 11,
+        "original_message": "SOS! Severe cardiac arrest patient collapsed on road. at Powai Lake.",
+        "category": "Medical Emergency",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 10,
+        "location": "Powai Lake, Powai, Mumbai",
         "coordinates": {
-            "lat": 18.9581934,
-            "lng": 72.8320729
+            "lat": 19.11997870589396,
+            "lng": 72.90013140054249
         },
-        "authenticity_score": 7,
-        "reasoning": "The message is specific enough to suggest a genuine problem, but lacks location details, lowering the score.",
-        "flags": [
-            "vague location"
-        ]
+        "need_type": [
+            "Medical",
+            "Ambulance"
+        ],
+        "timestamp": "2026-02-10T18:27:33.504730"
     },
     {
         "id": 12,
-        "original_message": "Electrical pole has fallen and wires are exposed near the entrance of Sanjay Gandhi National Park, Borivali. Very dangerous, sparking in the rain.",
-        "location_text": "near the entrance of Sanjay Gandhi National Park, Borivali",
-        "urgency": "Life-threatening",
-        "need_type": "Infrastructure",
-        "summary": "Fallen electrical pole with exposed wires near Sanjay Gandhi National Park entrance poses a life-threatening danger.",
-        "severity_score": 13,
+        "original_message": "SOS! Massive fire broke out in a commercial building. at Kandivali Station.",
+        "category": "Fire",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 7,
+        "location": "Kandivali Station, Kandivali, Mumbai",
         "coordinates": {
-            "lat": 19.232779,
-            "lng": 72.8717923
+            "lat": 19.206976507005074,
+            "lng": 72.85276285492662
         },
+        "need_type": [
+            "Fire",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T17:56:33.504733"
+    },
+    {
+        "id": 13,
+        "original_message": "SOS! Old building collapsed, people trapped under debris. at Lower Parel.",
+        "category": "Structure Collapse",
+        "priority": "Critical",
+        "severity_score": 10,
         "authenticity_score": 9,
-        "reasoning": "Specific location, detailed description of the hazard, and a sense of urgency increase authenticity.",
-        "flags": []
+        "location": "Lower Parel, Lower Parel, Mumbai",
+        "coordinates": {
+            "lat": 18.991161663355783,
+            "lng": 72.8329504575683
+        },
+        "need_type": [
+            "Fire",
+            "Medical",
+            "Police",
+            "NDRF"
+        ],
+        "timestamp": "2026-02-10T17:47:33.504736"
+    },
+    {
+        "id": 14,
+        "original_message": "SOS! Severe cardiac arrest patient collapsed on road. at Girgaon Chowpatty.",
+        "category": "Medical Emergency",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 8,
+        "location": "Girgaon Chowpatty, Girgaon, Mumbai",
+        "coordinates": {
+            "lat": 18.94701198016934,
+            "lng": 72.82010551682602
+        },
+        "need_type": [
+            "Medical",
+            "Ambulance"
+        ],
+        "timestamp": "2026-02-10T18:17:33.504739"
+    },
+    {
+        "id": 15,
+        "original_message": "SOS! Water logging blocking main access road. at Vikhroli Station.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 10,
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.10514027317376,
+            "lng": 72.93167922851745
+        },
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:22:33.504743"
+    },
+    {
+        "id": 16,
+        "original_message": "SOS! Car collision with multiple injuries reported. at Colaba Causeway.",
+        "category": "Accident",
+        "priority": "High",
+        "severity_score": 7,
+        "authenticity_score": 8,
+        "location": "Colaba Causeway, Colaba, Mumbai",
+        "coordinates": {
+            "lat": 18.912960865168394,
+            "lng": 72.82996570429408
+        },
+        "need_type": [
+            "Medical",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T17:51:33.504746"
+    },
+    {
+        "id": 17,
+        "original_message": "SOS! Water logging blocking main access road. at Girgaon Chowpatty.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 3,
+        "location": "Girgaon Chowpatty, Girgaon, Mumbai",
+        "coordinates": {
+            "lat": 18.951122586410534,
+            "lng": 72.8225872793595
+        },
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T19:23:33.504749"
+    },
+    {
+        "id": 18,
+        "original_message": "SOS! Severe cardiac arrest patient collapsed on road. at Girgaon Chowpatty.",
+        "category": "Medical Emergency",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 9,
+        "location": "Girgaon Chowpatty, Girgaon, Mumbai",
+        "coordinates": {
+            "lat": 18.95049091041436,
+            "lng": 72.8208004333855
+        },
+        "need_type": [
+            "Medical",
+            "Ambulance"
+        ],
+        "timestamp": "2026-02-10T19:04:33.504752"
+    },
+    {
+        "id": 19,
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Powai Lake.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
+        "authenticity_score": 10,
+        "location": "Powai Lake, Powai, Mumbai",
+        "coordinates": {
+            "lat": 19.123942444607007,
+            "lng": 72.90670081897268
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T19:41:33.504757"
+    },
+    {
+        "id": 20,
+        "original_message": "SOS! Huge tree fell on a parked car, blocking traffic. at Vikhroli Station.",
+        "category": "Tree Fall",
+        "priority": "Moderate",
+        "severity_score": 5,
+        "authenticity_score": 5,
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.11457050594197,
+            "lng": 72.9313033735621
+        },
+        "need_type": [
+            "Fire",
+            "Municipality"
+        ],
+        "timestamp": "2026-02-10T18:57:33.504760"
+    },
+    {
+        "id": 21,
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Vikhroli Station.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
+        "authenticity_score": 8,
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.10974545457155,
+            "lng": 72.93433519812376
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:27:33.504763"
+    },
+    {
+        "id": 22,
+        "original_message": "SOS! Public disturbance and crowd gathering aggressively. at Gateway of India.",
+        "category": "Riot Control",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 7,
+        "location": "Gateway of India, Colaba, Mumbai",
+        "coordinates": {
+            "lat": 18.919298292829207,
+            "lng": 72.83923083181725
+        },
+        "need_type": [
+            "Police",
+            "Crowd Control"
+        ],
+        "timestamp": "2026-02-10T18:09:33.504766"
+    },
+    {
+        "id": 23,
+        "original_message": "SOS! Toxic gas smell reported near residential area. at Dadar Station.",
+        "category": "Gas Leak",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 8,
+        "location": "Dadar Station, Dadar, Mumbai",
+        "coordinates": {
+            "lat": 19.014077332840184,
+            "lng": 72.841242910439
+        },
+        "need_type": [
+            "Fire",
+            "Evacuation"
+        ],
+        "timestamp": "2026-02-10T18:50:33.504771"
+    },
+    {
+        "id": 24,
+        "original_message": "SOS! Water logging blocking main access road. at Vikhroli Station.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 7,
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.10644693633874,
+            "lng": 72.92959663156932
+        },
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:09:33.504774"
+    },
+    {
+        "id": 25,
+        "original_message": "SOS! Massive fire broke out in a commercial building. at Borivali National Park.",
+        "category": "Fire",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 8,
+        "location": "Borivali National Park, Borivali, Mumbai",
+        "coordinates": {
+            "lat": 19.22706464538446,
+            "lng": 72.86336306044095
+        },
+        "need_type": [
+            "Fire",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:41:33.504777"
+    },
+    {
+        "id": 26,
+        "original_message": "SOS! Severe cardiac arrest patient collapsed on road. at Versova.",
+        "category": "Medical Emergency",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 10,
+        "location": "Versova, Versova, Mumbai",
+        "coordinates": {
+            "lat": 19.129048401843622,
+            "lng": 72.81760962889784
+        },
+        "need_type": [
+            "Medical",
+            "Ambulance"
+        ],
+        "timestamp": "2026-02-10T18:40:33.504780"
+    },
+    {
+        "id": 27,
+        "original_message": "SOS! Water logging blocking main access road. at Dadar Station.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 10,
+        "location": "Dadar Station, Dadar, Mumbai",
+        "coordinates": {
+            "lat": 19.013346691101486,
+            "lng": 72.84575261922735
+        },
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:19:33.504783"
+    },
+    {
+        "id": 28,
+        "original_message": "SOS! Toxic gas smell reported near residential area. at Colaba Causeway.",
+        "category": "Gas Leak",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 8,
+        "location": "Colaba Causeway, Colaba, Mumbai",
+        "coordinates": {
+            "lat": 18.909000286990057,
+            "lng": 72.82010841078602
+        },
+        "need_type": [
+            "Fire",
+            "Evacuation"
+        ],
+        "timestamp": "2026-02-10T18:02:33.504786"
+    },
+    {
+        "id": 29,
+        "original_message": "SOS! Car collision with multiple injuries reported. at Goregaon Hub Mall.",
+        "category": "Accident",
+        "priority": "High",
+        "severity_score": 7,
+        "authenticity_score": 9,
+        "location": "Goregaon Hub Mall, Goregaon, Mumbai",
+        "coordinates": {
+            "lat": 19.168406388899413,
+            "lng": 72.85493414073373
+        },
+        "need_type": [
+            "Medical",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T17:46:33.504789"
+    },
+    {
+        "id": 30,
+        "original_message": "SOS! Massive fire broke out in a commercial building. at R City Mall.",
+        "category": "Fire",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 5,
+        "location": "R City Mall, Ghatkopar, Mumbai",
+        "coordinates": {
+            "lat": 19.09591931564953,
+            "lng": 72.91755057988898
+        },
+        "need_type": [
+            "Fire",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T19:28:33.504794"
+    },
+    {
+        "id": 31,
+        "original_message": "SOS! Water logging blocking main access road. at Gateway of India.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 10,
+        "location": "Gateway of India, Colaba, Mumbai",
+        "coordinates": {
+            "lat": 18.921439805447182,
+            "lng": 72.83461005734151
+        },
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T19:34:33.504797"
+    },
+    {
+        "id": 32,
+        "original_message": "SOS! Car collision with multiple injuries reported. at Sion Hospital.",
+        "category": "Accident",
+        "priority": "High",
+        "severity_score": 7,
+        "authenticity_score": 9,
+        "location": "Sion Hospital, Sion, Mumbai",
+        "coordinates": {
+            "lat": 19.03531719298266,
+            "lng": 72.86063306233473
+        },
+        "need_type": [
+            "Medical",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:39:33.504800"
+    },
+    {
+        "id": 33,
+        "original_message": "SOS! Car collision with multiple injuries reported. at Worli Sea Face.",
+        "category": "Accident",
+        "priority": "High",
+        "severity_score": 7,
+        "authenticity_score": 5,
+        "location": "Worli Sea Face, Worli, Mumbai",
+        "coordinates": {
+            "lat": 19.00943759532317,
+            "lng": 72.81235888494618
+        },
+        "need_type": [
+            "Medical",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T17:42:33.504803"
+    },
+    {
+        "id": 34,
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Lower Parel.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
+        "authenticity_score": 10,
+        "location": "Lower Parel, Lower Parel, Mumbai",
+        "coordinates": {
+            "lat": 18.99824584248642,
+            "lng": 72.82978525002729
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:26:33.504806"
+    },
+    {
+        "id": 35,
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Versova.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
+        "authenticity_score": 10,
+        "location": "Versova, Versova, Mumbai",
+        "coordinates": {
+            "lat": 19.130726044368696,
+            "lng": 72.81367804185068
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:49:33.504809"
+    },
+    {
+        "id": 36,
+        "original_message": "SOS! Water logging blocking main access road. at Andheri Station.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 7,
+        "location": "Andheri Station, Andheri, Mumbai",
+        "coordinates": {
+            "lat": 19.11065224433513,
+            "lng": 72.8419305422998
+        },
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:48:33.504813"
+    },
+    {
+        "id": 37,
+        "original_message": "SOS! Old building collapsed, people trapped under debris. at Borivali National Park.",
+        "category": "Structure Collapse",
+        "priority": "Critical",
+        "severity_score": 10,
+        "authenticity_score": 9,
+        "location": "Borivali National Park, Borivali, Mumbai",
+        "coordinates": {
+            "lat": 19.233130189248165,
+            "lng": 72.85839082081382
+        },
+        "need_type": [
+            "Fire",
+            "Medical",
+            "Police",
+            "NDRF"
+        ],
+        "timestamp": "2026-02-10T19:04:33.504816"
+    },
+    {
+        "id": 38,
+        "original_message": "SOS! Water logging blocking main access road. at Worli Sea Face.",
+        "category": "Flooding",
+        "priority": "High",
+        "severity_score": 6,
+        "authenticity_score": 8,
+        "location": "Worli Sea Face, Worli, Mumbai",
+        "coordinates": {
+            "lat": 19.014592053651278,
+            "lng": 72.81701489784022
+        },
+        "need_type": [
+            "Police",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:55:33.504819"
+    },
+    {
+        "id": 39,
+        "original_message": "SOS! Massive fire broke out in a commercial building. at Vikhroli Station.",
+        "category": "Fire",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 10,
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.10753965841414,
+            "lng": 72.93095786287567
+        },
+        "need_type": [
+            "Fire",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:18:33.504822"
+    },
+    {
+        "id": 40,
+        "original_message": "SOS! Toxic gas smell reported near residential area. at R City Mall.",
+        "category": "Gas Leak",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 5,
+        "location": "R City Mall, Ghatkopar, Mumbai",
+        "coordinates": {
+            "lat": 19.094121998083605,
+            "lng": 72.91424170545352
+        },
+        "need_type": [
+            "Fire",
+            "Evacuation"
+        ],
+        "timestamp": "2026-02-10T18:10:33.504825"
+    },
+    {
+        "id": 41,
+        "original_message": "SOS! Massive fire broke out in a commercial building. at Borivali National Park.",
+        "category": "Fire",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 8,
+        "location": "Borivali National Park, Borivali, Mumbai",
+        "coordinates": {
+            "lat": 19.23012006683265,
+            "lng": 72.85512611357528
+        },
+        "need_type": [
+            "Fire",
+            "Rescue"
+        ],
+        "timestamp": "2026-02-10T18:54:33.504828"
+    },
+    {
+        "id": 42,
+        "original_message": "SOS! Old building collapsed, people trapped under debris. at Borivali National Park.",
+        "category": "Structure Collapse",
+        "priority": "Critical",
+        "severity_score": 10,
+        "authenticity_score": 9,
+        "location": "Borivali National Park, Borivali, Mumbai",
+        "coordinates": {
+            "lat": 19.23465374391399,
+            "lng": 72.86189196891787
+        },
+        "need_type": [
+            "Fire",
+            "Medical",
+            "Police",
+            "NDRF"
+        ],
+        "timestamp": "2026-02-10T19:29:33.504831"
+    },
+    {
+        "id": 43,
+        "original_message": "SOS! Stray leopard spotted near residential complex. at Borivali National Park.",
+        "category": "Animal Rescue",
+        "priority": "Moderate",
+        "severity_score": 4,
+        "authenticity_score": 9,
+        "location": "Borivali National Park, Borivali, Mumbai",
+        "coordinates": {
+            "lat": 19.23479114177465,
+            "lng": 72.8588292762925
+        },
+        "need_type": [
+            "Forest Dept",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T19:06:33.504834"
+    },
+    {
+        "id": 44,
+        "original_message": "SOS! Toxic gas smell reported near residential area. at Girgaon Chowpatty.",
+        "category": "Gas Leak",
+        "priority": "Critical",
+        "severity_score": 9,
+        "authenticity_score": 7,
+        "location": "Girgaon Chowpatty, Girgaon, Mumbai",
+        "coordinates": {
+            "lat": 18.951947225889803,
+            "lng": 72.81688352544582
+        },
+        "need_type": [
+            "Fire",
+            "Evacuation"
+        ],
+        "timestamp": "2026-02-10T18:19:33.504837"
+    },
+    {
+        "id": 45,
+        "original_message": "SOS! Severe cardiac arrest patient collapsed on road. at Colaba Causeway.",
+        "category": "Medical Emergency",
+        "priority": "Critical",
+        "severity_score": 8,
+        "authenticity_score": 8,
+        "location": "Colaba Causeway, Colaba, Mumbai",
+        "coordinates": {
+            "lat": 18.907897161179488,
+            "lng": 72.82892802826764
+        },
+        "need_type": [
+            "Medical",
+            "Ambulance"
+        ],
+        "timestamp": "2026-02-10T17:58:33.504842"
+    },
+    {
+        "id": 46,
+        "original_message": "SOS! Huge tree fell on a parked car, blocking traffic. at Andheri Station.",
+        "category": "Tree Fall",
+        "priority": "Moderate",
+        "severity_score": 5,
+        "authenticity_score": 9,
+        "location": "Andheri Station, Andheri, Mumbai",
+        "coordinates": {
+            "lat": 19.110226281706694,
+            "lng": 72.84724592048984
+        },
+        "need_type": [
+            "Fire",
+            "Municipality"
+        ],
+        "timestamp": "2026-02-10T18:52:33.504845"
+    },
+    {
+        "id": 47,
+        "original_message": "SOS! Car collision with multiple injuries reported. at Vikhroli Station.",
+        "category": "Accident",
+        "priority": "High",
+        "severity_score": 7,
+        "authenticity_score": 3,
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.113264505704038,
+            "lng": 72.9310584194136
+        },
+        "need_type": [
+            "Medical",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:50:33.504848"
+    },
+    {
+        "id": 48,
+        "original_message": "SOS! Car collision with multiple injuries reported. at Marine Drive.",
+        "category": "Accident",
+        "priority": "High",
+        "severity_score": 7,
+        "authenticity_score": 8,
+        "location": "Marine Drive, Marine Lines, Mumbai",
+        "coordinates": {
+            "lat": 18.941401445209774,
+            "lng": 72.82047354630134
+        },
+        "need_type": [
+            "Medical",
+            "Police"
+        ],
+        "timestamp": "2026-02-10T18:25:33.504853"
+    },
+    {
+        "id": 49,
+        "original_message": "SOS! Old building collapsed, people trapped under debris. at Kandivali Station.",
+        "category": "Structure Collapse",
+        "priority": "Critical",
+        "severity_score": 10,
+        "authenticity_score": 9,
+        "location": "Kandivali Station, Kandivali, Mumbai",
+        "coordinates": {
+            "lat": 19.208221959352443,
+            "lng": 72.85112577689945
+        },
+        "need_type": [
+            "Fire",
+            "Medical",
+            "Police",
+            "NDRF"
+        ],
+        "timestamp": "2026-02-10T19:33:33.504856"
+    },
+    {
+        "id": 50,
+        "original_message": "SOS! Old building collapsed, people trapped under debris. at Vikhroli Station.",
+        "category": "Structure Collapse",
+        "priority": "Critical",
+        "severity_score": 10,
+        "authenticity_score": 5,
+        "location": "Vikhroli Station, Vikhroli, Mumbai",
+        "coordinates": {
+            "lat": 19.105154163372806,
+            "lng": 72.9332556639367
+        },
+        "need_type": [
+            "Fire",
+            "Medical",
+            "Police",
+            "NDRF"
+        ],
+        "timestamp": "2026-02-10T19:38:33.504859"
     }
 ]

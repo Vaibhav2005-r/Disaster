@@ -139,6 +139,39 @@ def process_sos_message(message_id: int, text: str) -> dict:
         "flags": analysis.get("flags", [])
     }
 
+# --- FUNCTION 4: SITUATION OVERVIEW (NEW) ---
+def generate_situation_report() -> dict:
+    """
+    Generates a brief, realistic 2-sentence summary of Mumbai's current condition 
+    (weather/traffic) based on the time of day using Gemini.
+    """
+    import datetime
+    current_time = datetime.datetime.now().strftime("%I:%M %p")
+    
+    prompt = f"""
+    You are an AI reporting on the current status of Mumbai for a disaster dashboard.
+    Current Time: {current_time}.
+    
+    Generate a JSON object with:
+    1. "temperature": A realistic temperature for Mumbai at this time (e.g., "28°C").
+    2. "condition": Short weather description (e.g., "Humid & Cloudy", "Heavy Rain").
+    3. "insight": A 1-sentence strategic insight for emergency responders (e.g., "Expect delays on Western Express Highway due to peak hour traffic.", "High tide expected at 4 PM, monitor coastal areas.").
+    
+    Make it sound professional and realistic.
+    """
+    
+    try:
+        response = gemini_model.generate_content(prompt)
+        json_text = response.text.strip().replace("```json", "").replace("```", "")
+        return json.loads(json_text)
+    except Exception as e:
+        print(f"Situation Report generation failed: {e}")
+        return {
+            "temperature": "30°C", 
+            "condition": "Clear", 
+            "insight": "System online. Monitoring all frequencies."
+        }
+
 # --- EXAMPLE USAGE ---
 if __name__ == "__main__":
     sample_messages = [
